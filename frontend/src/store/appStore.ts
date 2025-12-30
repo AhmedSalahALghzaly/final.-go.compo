@@ -56,6 +56,7 @@ interface AppState {
   
   // Cart Actions (local-first)
   addToCart: (productId: string, quantity?: number) => void;
+  addToLocalCart: (item: { product_id: string; quantity: number; product?: any }) => void;
   updateCartItem: (productId: string, quantity: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
