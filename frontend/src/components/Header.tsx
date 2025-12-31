@@ -99,6 +99,9 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Icons Section - Far left in RTL, Far right in LTR */}
         <View style={[styles.iconsSection, isRTL && styles.iconsSectionRTL]}>
+          {/* Sync Indicator - Compact version */}
+          <SyncIndicator compact />
+
           {/* Admin Panel Icon - Only visible for authorized admins */}
           {user && ADMIN_EMAILS.includes(user.email?.toLowerCase()) && (
             <TouchableOpacity 
