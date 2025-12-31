@@ -21,15 +21,7 @@ const ADMIN_EMAILS = [
   'pc.2025.ai@gmail.com',
 ];
 
-// Color Moods for the Mood Switcher
-const COLOR_MOODS = [
-  { id: 'ocean', name: 'Ocean', nameAr: 'المحيط', primary: '#0EA5E9', background: '#F0F9FF', icon: 'water' },
-  { id: 'sunset', name: 'Sunset', nameAr: 'الغروب', primary: '#F97316', background: '#FFF7ED', icon: 'sunny' },
-  { id: 'forest', name: 'Forest', nameAr: 'الغابة', primary: '#22C55E', background: '#F0FDF4', icon: 'leaf' },
-  { id: 'lavender', name: 'Lavender', nameAr: 'اللافندر', primary: '#A855F7', background: '#FAF5FF', icon: 'flower' },
-  { id: 'rose', name: 'Rose', nameAr: 'الوردي', primary: '#EC4899', background: '#FDF2F8', icon: 'rose' },
-  { id: 'midnight', name: 'Midnight', nameAr: 'منتصف الليل', primary: '#6366F1', background: '#EEF2FF', icon: 'moon' },
-];
+// Neon Night Theme (Default)
 
 interface HeaderProps {
   title?: string;
