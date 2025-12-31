@@ -126,48 +126,15 @@ export default function ProductBrandsAdmin() {
 
           {/* Logo Upload Section */}
           <View style={styles.formGroup}>
-            <Text style={[styles.label, { color: colors.text }]}>
-              {language === 'ar' ? 'شعار الماركة' : 'Brand Logo'}
-            </Text>
-            
-            <View style={styles.imageUploadSection}>
-              {logoImage ? (
-                <View style={styles.imagePreviewContainer}>
-                  <Image source={{ uri: logoImage }} style={styles.logoPreview} />
-                  <TouchableOpacity
-                    style={styles.removeImageBtn}
-                    onPress={() => setLogoImage(null)}
-                  >
-                    <Ionicons name="close-circle" size={24} color="#ef4444" />
-                  </TouchableOpacity>
-                </View>
-              ) : (
-                <TouchableOpacity
-                  style={[styles.uploadBtn, { backgroundColor: colors.surface, borderColor: colors.border }]}
-                  onPress={pickImage}
-                >
-                  <Ionicons name="camera" size={32} color={colors.primary} />
-                  <Text style={[styles.uploadBtnText, { color: colors.primary }]}>
-                    {language === 'ar' ? 'اختر صورة' : 'Pick Image'}
-                  </Text>
-                </TouchableOpacity>
-              )}
-            </View>
-
-            {!logoImage && (
-              <View style={styles.urlInputSection}>
-                <Text style={[styles.orText, { color: colors.textSecondary }]}>
-                  {language === 'ar' ? 'أو أدخل رابط الصورة' : 'Or enter image URL'}
-                </Text>
-                <TextInput
-                  style={[styles.input, { backgroundColor: colors.surface, borderColor: colors.border, color: colors.text }]}
-                  value={logoUrl}
-                  onChangeText={setLogoUrl}
-                  placeholder="https://example.com/logo.png"
-                  placeholderTextColor={colors.textSecondary}
-                />
-              </View>
-            )}
+            <ImageUploader
+              mode="single"
+              value={logoImage}
+              onChange={(newImage) => setLogoImage(newImage as string)}
+              size="medium"
+              shape="circle"
+              label={language === 'ar' ? 'شعار الماركة' : 'Brand Logo'}
+              hint={language === 'ar' ? 'اختر صورة الشعار' : 'Choose logo image'}
+            />
           </View>
 
           <View style={styles.formGroup}>
