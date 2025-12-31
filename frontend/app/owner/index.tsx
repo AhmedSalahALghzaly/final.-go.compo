@@ -39,13 +39,39 @@ const DASHBOARD_ICONS = [
 export default function OwnerDashboard() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const mood = useColorMood();
+  const storedMood = useColorMood();
   const language = useAppStore((state) => state.language);
   const user = useAppStore((state) => state.user);
   const orders = useAppStore((state) => state.orders);
   const customers = useAppStore((state) => state.customers);
   const products = useAppStore((state) => state.products);
   const setOrderFilter = useAppStore((state) => state.setOrderFilter);
+
+  // Default mood fallback
+  const defaultMood = {
+    primary: '#3B82F6',
+    background: '#F0F9FF',
+    surface: '#FFFFFF',
+    text: '#1E3A5F',
+    textSecondary: '#64748B',
+    border: '#E2E8F0',
+    success: '#10B981',
+    warning: '#F59E0B',
+    error: '#EF4444',
+    card: '#FFFFFF',
+    tabBar: '#FFFFFF',
+    tabBarActive: '#3B82F6',
+    tabBarInactive: '#9CA3AF',
+    gradient: ['#1E1E3F', '#2D2D5F', '#3D3D7F'],
+  };
+
+  // Use stored mood or default
+  const mood = storedMood || defaultMood;
+
+  // Get gradient colors safely
+  const gradientColors = (mood as any).gradient && Array.isArray((mood as any).gradient) && (mood as any).gradient.length >= 3
+    ? (mood as any).gradient
+    : ['#1E1E3F', '#2D2D5F', '#3D3D7F'];
 
   // Connect WebSocket for real-time updates
   useWebSocket();
