@@ -172,7 +172,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           {showSearch && (
             <TouchableOpacity 
-              onPress={() => setShowSearchModal(true)} 
+              onPress={() => setShowAdvancedSearch(true)} 
               style={styles.iconButton}
             >
               <Ionicons name="search" size={22} color={headerIconColor} />
