@@ -14,7 +14,8 @@ import Animated, {
   Extrapolation,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useColorMood, useTheme } from '../../store/appStore';
+import { useColorMood } from '../../store/appStore';
+import { useTheme } from '../../hooks/useTheme';
 import { DURATIONS, EASINGS } from '../../constants/animations';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
