@@ -108,6 +108,37 @@ export default function MarketingSuiteScreen() {
 
   const [saving, setSaving] = useState(false);
 
+  // Toast state
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState<'success' | 'error' | 'warning' | 'info'>('success');
+
+  const showToast = (message: string, type: 'success' | 'error' | 'warning' | 'info' = 'success') => {
+    setToastMessage(message);
+    setToastType(type);
+    setToastVisible(true);
+  };
+
+  // Handle promotion reorder
+  const handlePromotionReorder = async (newOrder: Promotion[]) => {
+    // Optimistic update
+    setPromotions(newOrder);
+    
+    try {
+      // Update each promotion's sort_order on the backend
+      await Promise.all(
+        newOrder.map((promo, index) =>
+          promotionApi.update(promo.id, { ...promo, sort_order: index })
+        )
+      );
+      showToast(language === 'ar' ? 'تم تحديث الترتيب بنجاح' : 'Order updated successfully', 'success');
+    } catch (error) {
+      console.error('Error updating promotion order:', error);
+      showToast(language === 'ar' ? 'فشل في تحديث الترتيب' : 'Failed to update order', 'error');
+      fetchData(); // Revert to original order
+    }
+  };
+
   // Fetch data
   const fetchData = useCallback(async () => {
     try {
