@@ -460,90 +460,13 @@ export default function MarketingSuiteScreen() {
               </Text>
             </TouchableOpacity>
 
-            {/* Promotions List */}
-            {promotions.length === 0 ? (
-              <View style={styles.emptyState}>
-                <Ionicons name="megaphone-outline" size={48} color={colors.textSecondary} />
-                <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
-                  {language === 'ar' ? 'لا توجد عروض ترويجية' : 'No promotions yet'}
-                </Text>
-              </View>
-            ) : (
-              promotions.map((promo) => (
-                <View
-                  key={promo.id}
-                  style={[styles.itemCard, { backgroundColor: colors.card, borderColor: colors.border }]}
-                >
-                  <View style={styles.itemHeader}>
-                    {promo.image ? (
-                      <Image source={{ uri: promo.image }} style={styles.itemImage} />
-                    ) : (
-                      <View style={[styles.itemImagePlaceholder, { backgroundColor: colors.surface }]}>
-                        <Ionicons name="image-outline" size={24} color={colors.textSecondary} />
-                      </View>
-                    )}
-                    <View style={styles.itemInfo}>
-                      <Text style={[styles.itemTitle, { color: colors.text }]}>{promo.title}</Text>
-                      <View style={styles.itemBadges}>
-                        <View
-                          style={[
-                            styles.badge,
-                            { backgroundColor: promo.promotion_type === 'slider' ? '#3B82F6' : '#10B981' },
-                          ]}
-                        >
-                          <Text style={styles.badgeText}>
-                            {promo.promotion_type === 'slider'
-                              ? language === 'ar'
-                                ? 'سلايدر'
-                                : 'Slider'
-                              : language === 'ar'
-                              ? 'بانر'
-                              : 'Banner'}
-                          </Text>
-                        </View>
-                        <View
-                          style={[
-                            styles.badge,
-                            { backgroundColor: promo.is_active ? '#10B981' : '#EF4444' },
-                          ]}
-                        >
-                          <Text style={styles.badgeText}>
-                            {promo.is_active
-                              ? language === 'ar'
-                                ? 'نشط'
-                                : 'Active'
-                              : language === 'ar'
-                              ? 'غير نشط'
-                              : 'Inactive'}
-                          </Text>
-                        </View>
-                      </View>
-                      <Text style={[styles.itemTarget, { color: colors.textSecondary }]}>
-                        {promo.target_product
-                          ? `→ ${promo.target_product.name}`
-                          : promo.target_car_model
-                          ? `→ ${promo.target_car_model.name}`
-                          : ''}
-                      </Text>
-                    </View>
-                  </View>
-                  <View style={styles.itemActions}>
-                    <TouchableOpacity
-                      style={[styles.actionButton, { backgroundColor: colors.primary + '20' }]}
-                      onPress={() => openEditPromotion(promo)}
-                    >
-                      <Ionicons name="pencil" size={18} color={colors.primary} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[styles.actionButton, { backgroundColor: colors.error + '20' }]}
-                      onPress={() => deletePromotion(promo.id)}
-                    >
-                      <Ionicons name="trash" size={18} color={colors.error} />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              ))
-            )}
+            {/* Draggable Promotions List */}
+            <DraggablePromotionList
+              promotions={promotions}
+              onReorder={handlePromotionReorder}
+              onEdit={openEditPromotion}
+              onDelete={deletePromotion}
+            />
           </View>
         ) : (
           <View style={styles.section}>
