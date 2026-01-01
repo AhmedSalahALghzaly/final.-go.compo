@@ -56,7 +56,7 @@ export default function CategoriesAdmin() {
 
   const handleSave = async () => {
     if (!name.trim() || !nameAr.trim()) {
-      setError(language === 'ar' ? 'يرجى ملء جميع الحقول المطلوبة' : 'Please fill all required fields');
+      showToast(language === 'ar' ? 'يرجى ملء جميع الحقول المطلوبة' : 'Please fill all required fields', 'error');
       return;
     }
 
@@ -69,18 +69,18 @@ export default function CategoriesAdmin() {
         name_ar: nameAr.trim(),
         parent_id: parentId,
         icon: icon.trim() || null,
+        image: categoryImage || null,
       });
 
-      setShowSuccess(true);
+      showToast(language === 'ar' ? 'تم حفظ الفئة بنجاح' : 'Category saved successfully', 'success');
       setName('');
       setNameAr('');
       setParentId(null);
       setIcon('');
+      setCategoryImage('');
       fetchCategories();
-
-      setTimeout(() => setShowSuccess(false), 2000);
     } catch (error: any) {
-      setError(error.response?.data?.detail || 'Error saving category');
+      showToast(error.response?.data?.detail || 'Error saving category', 'error');
     } finally {
       setSaving(false);
     }
