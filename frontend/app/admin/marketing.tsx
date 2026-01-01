@@ -611,16 +611,19 @@ export default function MarketingSuiteScreen() {
                 placeholderTextColor={colors.textSecondary}
               />
 
-              <Text style={[styles.label, { color: colors.text }]}>
-                {language === 'ar' ? 'رابط الصورة' : 'Image URL'}
-              </Text>
-              <TextInput
-                style={[styles.input, { backgroundColor: colors.surface, color: colors.text, borderColor: colors.border }]}
-                value={promoImage}
-                onChangeText={setPromoImage}
-                placeholder="https://..."
-                placeholderTextColor={colors.textSecondary}
-              />
+              {/* Promotion Image Upload */}
+              <View style={styles.imageUploadSection}>
+                <ImageUploader
+                  mode="single"
+                  value={promoImage}
+                  onChange={(newImage) => setPromoImage(newImage as string)}
+                  size="large"
+                  shape="rounded"
+                  aspectRatio={[16, 9]}
+                  label={language === 'ar' ? 'صورة العرض الترويجي' : 'Promotion Image'}
+                  hint={language === 'ar' ? 'أفضل مقاس: 1920×1080' : 'Best size: 1920×1080'}
+                />
+              </View>
 
               <Text style={[styles.label, { color: colors.text }]}>
                 {language === 'ar' ? 'نوع العرض' : 'Promotion Type'}
