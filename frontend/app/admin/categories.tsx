@@ -193,6 +193,19 @@ export default function CategoriesAdmin() {
             />
           </View>
 
+          {/* Category Image Upload */}
+          <View style={styles.formGroup}>
+            <ImageUploader
+              mode="single"
+              value={categoryImage}
+              onChange={(newImage) => setCategoryImage(newImage as string)}
+              size="medium"
+              shape="rounded"
+              label={language === 'ar' ? 'صورة الفئة' : 'Category Image'}
+              hint={language === 'ar' ? 'اختر صورة للفئة (اختياري)' : 'Choose a category image (optional)'}
+            />
+          </View>
+
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
           <TouchableOpacity
